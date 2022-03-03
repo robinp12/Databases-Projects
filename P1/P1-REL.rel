@@ -1,0 +1,48 @@
+1) Country {name}
+
+2) (Mountain where height > 3000.0 and height < 4000.0) {name}
+
+3) (((Province {name,area,country} where area < 200.0) rename {name as province ,country as code}) 
+join 
+((Country {code,name}) rename {name as country}) 
+join 
+(Encompasses {country,continent} rename {country as code} where continent = 'Europe')){province,country}
+
+4) Language {name} rename {name as language}
+
+5) ((Country {code, name}) JOIN (Independence {independence, country} RENAME {country as code})) {name, independence}
+
+6) PAS CORRECT 
+
+7) ((Mountain rename {name as mountain}) join ((GeoMountain rename {country as code}) join Country  where name = "Switzerland") where height > 4400.0 and height < 4500.0){mountain, height}
+
+8) (((Borders {country1, country2})
+join 
+(Country {code,name} rename {code as country1, name as name1})
+join 
+(Country {code,name} rename {code as country2, name as name2}))
+where country1 < country2) {name1,name2}
+
+9) ((Country {name,code} rename {code as country})
+not matching
+(GeoMountain)) {name}
+
+10) (Province {name}) intersect (Country {capital} rename {capital as name})
+
+11) PAS CORRECT
+
+12) relation { tuple {cnt count(EthnicGroup {name})}}
+
+13) PAS CORRECT 
+
+14) (Language join (Country {code} rename {code as country})
+where percentage = max(Language {country,percentage} rename {country as c} 
+where c = country, percentage)) {country, name}
+
+
+15) ((Borders {country1, country2} rename {country1 as c1, country2 as c2}) 
+not matching
+(Borders {country1, country2} rename {country1 as c2, country2 as c1}))
+
+
+16) PAS CORRECT
