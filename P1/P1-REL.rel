@@ -12,7 +12,8 @@ join
 
 5) ((Country {code, name}) JOIN (Independence {independence, country} RENAME {country as code})) {name, independence}
 
-6) PAS CORRECT 
+6) ((Borders where country2 = "TJ") {country1} Intersect (Borders where country2 = "IND") {country1} 
+join Country where country1 = code) {code, name}
 
 7) ((Mountain rename {name as mountain}) join ((GeoMountain rename {country as code}) join Country  where name = "Switzerland") where height > 4400.0 and height < 4500.0){mountain, height}
 
